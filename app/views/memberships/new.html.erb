@@ -1,0 +1,27 @@
+ 
+ <%= form_with model: @membership do |form| %>
+  <div>
+   <%= form.label :name %><br>
+   <%= form.text_field :name %>
+   <% @membership.errors.full_messages_for(:name).each do |message| %>
+   <div><%= message %></div>
+   <% end %>
+  </div>
+
+  <div>
+   <%= form.label :discription %><br>
+   <%= form.text_area :discription %><br>
+   <% @membership.errors.full_messages_for(:discription).each do |message| %>
+   <div><%= message %></div>
+   <% end %>
+  </div>
+     
+  <div>
+   <%#= form.label :images, style: "display: block" %>
+   <%#= form.file_field :images %>
+  </div>
+
+  <div>
+   <%= form.submit %>
+  </div>
+<% end %>

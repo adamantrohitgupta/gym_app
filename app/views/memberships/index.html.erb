@@ -1,0 +1,27 @@
+<h1 class="text-center mt-4 ">Membership Plan</h1>
+<div class="container d-flex flex-wrap justify-content-center align-items-center">
+  <% @membership.each do |membership|%>
+    <div class="card w-30 p-3 m-3 text-capitalize shadow" >
+      <p>
+        <strong>name:</strong>
+        <%= membership.name%>
+        </p>
+        <p>
+        <strong>description:</strong>
+        <%= membership.discription%>
+        </p>
+         <p>
+        <strong>price:</strong>
+        <%= "#{membership.price}"%>
+        </p>
+        
+        <%if current_user.memberships.include?(membership) %>
+           <h3 ><%= link_to " Joined", "/users/index",class:"btn btn-lg btn-success text-white" %></h3>
+          <% elsif current_user.memberships.any? {|x| x.gym_class == membership.gym_class } %>
+           <h3> <%= button_to "Upgrade membership", "/upgrade?id=#{membership.id}" ,class:"btn btn-lg btn-success text-white",method: :patch%></h3>
+          <% else %>
+           <h3 ><%= link_to "Create Payment", "/plans/new?id=#{membership.id}",class:"btn btn-lg  btn-success text-white" %></h3>
+        <% end %>
+    </div> 
+  <%end%> 
+</div>

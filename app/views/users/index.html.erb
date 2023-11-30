@@ -1,0 +1,44 @@
+ 
+<div class="mt-5">
+  <h5 class = "text-center "><strong>Name: <%= current_user.name.capitalize %></strong>
+  </h5>
+<div class="container d-flex flex-wrap justify-content-center align-items-center">
+  <% @plans.each do |plan| %>
+  
+    <div class="card  p-3 m-3 text-capitalize shadow">
+      <p>
+        <strong>membership:</strong>
+        <%= plan.membership.name %><br> 
+      </p>
+      <p>
+        <strong>gym_class:</strong>
+        <%= plan.membership.gym_class.name %> <br>
+      </p>
+      <p>
+        <strong>gym name:</strong>
+        <%= plan.membership.gym_class.gym.name %>
+      </p>
+      <p>
+        <strong>buy plan:</strong>
+        <%= plan.created_at.strftime("%d/%m/%y") %>
+      </p>
+      <p>
+        <strong>expire plan:</strong>
+        <% expire_date = (plan.created_at + plan.membership.days.days) %>
+        <%= expire_date.strftime("%d/%m/%y") %>
+      </p>
+      <p>
+        <strong>Remaining days:</strong>
+        <% if expire_date.present? %>
+          <% expire_date = expire_date.to_date %> 
+          <% remaining_days = (expire_date - Date.today).to_i %>
+          <%= remaining_days %> 
+          <% if remaining_days.zero? %>
+            <% plan.destroy %>
+          <% end %>
+        <% end %>
+      </p>
+    </div>
+  <% end %> 
+</div>
+</div>
