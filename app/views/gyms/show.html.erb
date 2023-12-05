@@ -1,36 +1,38 @@
 <div class="container d-flex flex-wrap p-3 justify-content-center align-items-center">
-
-<% @gym_classes.each do |gym_class| %>
-<div class="card p-2 m-2" style="width: 18rem;">
- 
-<%= image_tag(gym_class.images, class: "card-img-top ") %>
-
-  <div class="card-body">
-    <h5 class="card-title"> <%= gym_class.name.capitalize %></h5>
-    <p class="card-text"> <%= gym_class.description %></p>
-    
-    <p>
-      <strong>Timing:</strong>
-      <%= "#{gym_class.start_time.strftime('%I:%M %p')} - #{gym_class.end_time.strftime('%I:%M %p')}" %>
-    </p>
-    <p>
-      <strong>Capacity:</strong>
-      <%= "#{gym_class.capacity} seats" %>
-    </p>
-      <p>
-          <strong>Booked:</strong>
-          <%= gym_class.memberships.sum { |x| x.users.count } %>
+  <% @gym_classes.each do |gym_class| %>
+   <div class="card p-2 m-2" style="width: 18rem;">
+      <%= image_tag(gym_class.images, class: "card-img-top ") %>
+  
+     <div class="card-body">
+       <h5 class="card-title"> <%= gym_class.name.capitalize %></h5>
+       <p class="card-text"> <%= gym_class.description %></p>
+      
+        <p>
+         <strong>Timing:</strong>
+         <%= "#{gym_class.start_time.strftime('%I:%M %p')} - #{gym_class.end_time.strftime('%I:%M %p')}" %>
         </p>
-     <% if gym_class.capacity.eql?(gym_class.memberships.sum { |x| x.users.count }) %>
-          <h3>
-            <%= link_to "Class Full", "/",class:"btn btn-lg btn-success text-white" %>
-          </h3>
-        <% else %>
-          <h3>
-            <%= link_to "Join Class", "/memberships?class=#{gym_class.id}",class:"btn btn-lg  btn-success text-white" %>
-          </h3>
+
+        <p>
+          <strong>Capacity:</strong>
+          <%= "#{gym_class.capacity} seats" %>
+        </p>
+
+        <p>
+          <strong>Trainer:</strong>
+         <%= gym_class.trainer.name %>
+        </p>
+        <p>
+          <strong>Booked:</strong>
+          <%= gym_class.memberships.sum  { |x| x.users.count } %>
+        </p>
+        
+        <% if gym_class.capacity.eql?(gym_class.memberships.sum { |x| x.users.count }) %>
+         <h3> <%= link_to "Class Full", "/",class:"btn btn-lg btn-danger text-white" %></h3>
+         <% else %>
+         <h3> <%= link_to "Join Class", "/memberships?class=#{gym_class.id}",class:"btn btn-lg  btn-success text-white" %></h3>
         <% end %>
-  </div>
+      </div>
+    </div>
+  <%end%>
 </div>
-<%end%>
-</div>
+  

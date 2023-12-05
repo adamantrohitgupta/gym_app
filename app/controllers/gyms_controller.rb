@@ -7,6 +7,7 @@ class GymsController < ApplicationController
   def show
     @gym = Gym.find(params[:id])
     @gym_classes = @gym.gym_classes
+    # render json: {message:"successfully showed"},status: :ok
   end
  
   def new
@@ -38,7 +39,7 @@ class GymsController < ApplicationController
  def destroy
    @gym = Gym.find(params[:id])
    @gym.destroy
-   redirect_to gyms_path, status: :see_other
+   redirect_to gyms_path, status: :ok
   end
 
   private

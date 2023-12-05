@@ -1,0 +1,20 @@
+
+<h1 class="textmembership text-center mt-4 ">Trainer</h1>
+<div class="container d-flex flex-wrap justify-content-center align-items-center">
+ <%@trainers.each do |x| %>
+     <div class="shadow card align-items-center justify-content-center   shadow text-center p-3 m-3 text-capitalize shadow"  style="width:20rem;">  
+         
+ 
+     
+     <%= image_tag x.image , class:"img-fluid", style:"width:7rem; height:7rem; border-radius:50%;"%>
+     <h5 class="my-3"> <%= x.name%></h5>
+      <p>
+        <strong>Experience : </strong><%= "#{x.experience} years"%>
+      </p>
+     <p><strong>Specialist: </strong><%= x.specialist%></p>
+     
+     <p><strong>Contact : </strong><%= x.phone%></p>
+     <p><strong>Email: </strong><%= x.email%></p>
+     </div> 
+   <%end%> 
+</div>

@@ -2,9 +2,9 @@
   <p>
    <strong>photos:</strong>
    <%if @gym_class.images.persisted? %>
-   <%= image_tag(@gym_class.images,:width => "20%",:height => "10%")%>
-   <% else %>
-   <h4>image not found</h4>
+     <%= image_tag(@gym_class.images,:width => "20%",:height => "10%")%>
+     <% else %>
+     <h4>image not found</h4>
    <%end%>
   </p>
 

@@ -14,7 +14,7 @@ development:
 
 test:
   <<: *default
-  database: gym_app
+  database: gym_text
 
 production:
   <<: *default

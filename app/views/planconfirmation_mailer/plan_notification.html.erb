@@ -1,0 +1,21 @@
+<h1><%="Hello #{@user.name.capitalize}"%></h1>
+ 
+ <h5>details of your plan</h5>
+  <p>
+    <strong>Membership Plan :</strong>
+    <%=@plan.name  %>
+  </p>
+
+ <p>
+   <strong>Gym Class :</strong>
+  <%= @plan.gym_class.name%>
+ </p>
+
+ <p>
+   <strong>Trainer : </strong>
+   <%=@plan.gym_class.trainer.name%>
+ </p>
+ <p>
+   <strong>Class time: </strong>
+   <%= "#{@plan.gym_class.start_time.strftime('%I:%M %p')} - #{@plan.gym_class.end_time.strftime('%I:%M %p')}" %>
+ </p>

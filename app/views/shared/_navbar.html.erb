@@ -11,7 +11,7 @@
         </li>
       <% if user_signed_in? %>
          <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/gym_classes">Classes</a>
+          <a class="nav-link active" aria-current="page" href="/trainers/index">Trainer</a>
         </li>
          <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/users/index">profile</a>
@@ -22,22 +22,16 @@
           <li class="nav-item">
           <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link active" %>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+         
        <% else %>
        <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/users/sign_up">sign_up</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/users/sign_in">logg_in</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link active " aria-current="page" href="/admin">Admin</a>
         </li>
       <% end %>
       </ul>

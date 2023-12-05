@@ -3,7 +3,7 @@
    <%= form.label :name %><br>
    <%= form.text_field :name %>
    <% @gym.errors.full_messages_for(:name).each do |message| %>
-   <div><= message %></div>
+     <div><= message %></div>
    <% end %>
   </div>
 
@@ -11,7 +11,7 @@
    <%= form.label :discription %><br>
    <%= form.text_area :discription %><br>
    <% @gym.errors.full_messages_for(:discription).each do |message| %>
-   <div><%= message %></div>
+     <div><%= message %></div>
    <% end %>
   </div>
      

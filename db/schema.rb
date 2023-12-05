@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_191621) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_063326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,7 +77,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_191621) do
     t.string "description"
     t.bigint "gym_id"
     t.integer "capacity"
+    t.bigint "trainer_id"
     t.index ["gym_id"], name: "index_gym_classes_on_gym_id"
+    t.index ["trainer_id"], name: "index_gym_classes_on_trainer_id"
   end
 
   create_table "gyms", force: :cascade do |t|
@@ -131,7 +133,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_191621) do
     t.integer "experience"
     t.string "specialist"
     t.string "email"
-    t.integer "phone"
+    t.bigint "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -146,7 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_191621) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "address"
-    t.integer "phone_number"
+    t.bigint "phone_number"
     t.date "date_of_birth"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

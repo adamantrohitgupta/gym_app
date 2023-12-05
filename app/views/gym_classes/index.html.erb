@@ -1,17 +1,16 @@
-<%#= link_to "create gym_class",new_gym_class_path %>
 <div>
 <% @gym_classes.each do |x| %>
   <p>
     <strong>photos:</strong>
     <% if x.images.persisted? %>
-    <%= image_tag(x.images,:width => "20%",:height => "10%")%>
-    <% else %>
+      <%= image_tag(x.images,:width => "20%",:height => "10%")%>
+      <% else %>
       <h4>image not found</h4>
     <%end%>
   </p>
   <p>
-    <strong>Name:</strong>
-    <%=x.name %>
+   <%=x.name %>
+   <strong>Name:</strong>
   </p>
     <%= link_to 'show detail',gym_class_path(x) %>
      <%#= link_to 'edit gym_class',edit_gym_class_path(x) %>

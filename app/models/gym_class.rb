@@ -1,14 +1,21 @@
 class GymClass < ApplicationRecord
-  belongs_to :gym  
-  has_one_attached :images
+  belongs_to :gym 
+  belongs_to :trainer
   has_many :memberships  
- 
+  has_one_attached :images
+
+  validates :name,        presence: true,length: { minimum: 4 }
+  validates :start_time , presence: true
+  validates :capacity,    presence: true
+  validates :description, presence: true
+  validates :end_time,    presence: true
  
   def self.ransackable_attributes(auth_object = nil)
-    ["capacity", "created_at", "description", "end_time", "gym_id", "id", "name", "start_time", "updated_at"]
+    ["capacity", "created_at", "description", "end_time", "gym_id", "id", "name", "start_time", "trainer_id", "updated_at"]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["gym", "images_attachment", "images_blob", "memberships", "users"]
+    ["gym", "images_attachment", "images_blob", "memberships", "trainer"]
   end
+
 end
