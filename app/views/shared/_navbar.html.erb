@@ -1,40 +1,46 @@
-<nav class="navbar navbar-expand-lg  bg-dark navbar-dark border" >
-  <div class="container-fluid ">
-    <a class="navbar-brand" href="#">Cult Fit</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ">
-         <li class="nav-item">
-          <a class="nav-link active " aria-current="page" href="/">Home</a>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark mt-5px" style=" height: 70px; width: 100%">
+  <div class="container-fluid">
+    
+    <ul class="navbar-nav  ">
+    <a class="navbar-brand " href="#"><h3>Cult Fit</h2></a>
+       <li class="nav-item mt-1">
+          <a class="nav-link active" href="/">Home</a>
         </li>
+ 
       <% if user_signed_in? %>
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/trainers/index">Trainer</a>
+        <li class="nav-item mt-1 ">
+          <a class="nav-link active" href="/trainers/index">Trainer</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/users/index">profile</a>
+        
+        <li class="nav-item mt-1">
+          <a class="nav-link active" href="/admin">Admin</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/users/edit">edit</a>
-        </li>
-          <li class="nav-item">
-          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link active" %>
-        </li>
-         
-       <% else %>
-       <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/users/sign_up">sign_up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/users/sign_in">logg_in</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link active " aria-current="page" href="/admin">Admin</a>
+
+         <li class="nav-item mt-1 dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Profile
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/users/edit">Edit</a></li>
+            <li><a class="dropdown-item" href="/users/index">My Profile</a></li>
+          </ul>
         </li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item  ">
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link active" %>
+        </li>
+      <% else %>
+        <li class="nav-item mt-1">
+          <a class="nav-link active" href="/users/sign_up">Sign Up</a>
+        </li>
+        <li class="nav-item mt-1">
+          <a class="nav-link active" href="/users/sign_in">Log In</a>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>

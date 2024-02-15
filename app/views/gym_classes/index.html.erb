@@ -1,22 +1,10 @@
-<div>
-<% @gym_classes.each do |x| %>
-  <p>
-    <strong>photos:</strong>
-    <% if x.images.persisted? %>
-      <%= image_tag(x.images,:width => "20%",:height => "10%")%>
-      <% else %>
-      <h4>image not found</h4>
-    <%end%>
-  </p>
-  <p>
-   <%=x.name %>
-   <strong>Name:</strong>
-  </p>
-    <%= link_to 'show detail',gym_class_path(x) %>
-     <%#= link_to 'edit gym_class',edit_gym_class_path(x) %>
-     <%#= link_to "Destroy", gym_class_path(x), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-  <%end%>
-</div>
+<% if @gymclass.images.attached? %>
+<%= image_tag url_for(@gymclass.images), width: "50%", height: "40%", class: "gym_class_image" %>
+  <% if @gymclass.video.attached? %>
+    <%= video_tag url_for(@gymclass.video), width: "100%", height: "100%" %>
+  <% else %>
+    <h3>Video is not present</h3>
+  <% end %>
+<% else %>
+  <h3>Image is not present</h3>
+<% end %>

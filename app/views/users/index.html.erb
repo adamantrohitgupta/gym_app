@@ -2,15 +2,18 @@
   <h4><div class="notice m-2">
     <%= flash[:notice] %>
   </div></h4>
- 
+    
 <div class="mt-3">
-  <h3 class = "profile_name  mx-5 "><strong>Welcome <%= current_user.name.capitalize %></strong>
-  </h3>
+  
+ <div class="profile_name" style="padding-left: 15px;"> <h1><i class="fa-regular fa-user"></i> <%= current_user.name.capitalize %></div>
+  </h1>
+   
+<%# <%= image_tag('gymimage.jpg', width: "100px", height: "100px", style: "background-size: cover;") %> 
 
-<div class=" mx-4  d-flex flex-wrap  align-items-center">
+<div class=" mx-4  d-flex flex-wrap justify-content-center  align-items-center">
   <% @plans.each do |plan| %>
   
-    <div class=" card  shadow p-4 m-3 text-capitalize shadow">
+    <div class="card  shadow-lg p-3 m-3 mb-5 bg-white  text-capitalize rounded-9  border-bottom-0">
       <p>
         <strong>membership:</strong>
         <%= plan.membership.name.capitalize %><br> 
@@ -37,9 +40,12 @@
         <% expire_date = (plan.created_at + plan.membership.days.days) %>
         <%= expire_date.strftime("%d/%m/%y") %>
       </p>
-      <p>
+
+       <p>
         <strong>Remaining days:</strong>
+        
         <% if expire_date.present? %>
+         
           <% expire_date = expire_date.to_date %> 
           <% remaining_days = (expire_date - Date.today).to_i %>
           <%= remaining_days %> 

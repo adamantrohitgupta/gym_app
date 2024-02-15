@@ -35,8 +35,6 @@ RSpec.describe GymsController, type: :controller do
         expect(response).to have_http_status("302")
      end
     end
-  
-
    context "with invalid attributes" do
      it " not create a new gym" do
        params = {
@@ -50,20 +48,21 @@ RSpec.describe GymsController, type: :controller do
     end
   end
 
-  # context "User see the data" do
-  #   it "renders the show template" do
-  #     get :show, params: {id: gym.id}
-  #     expect(response).to have_http_status("200")    
-  #   end
-  # end
-  # describe "User see the data" do
-  #   let(:gym) { Gym.create(name: "power", discription: " this gym is best")} # Assuming you have a Gym factory or you can create a gym object
-  
-  context "User see the data" do
-    it "renders the show template" do
-      get :show, params: { id: gym.id }
-      expect(response).to have_http_status(302)
+ describe "Gymscontroller Get #show" do
+    context "User see the data" do
+      it "renders the show template" do
+        get :show, params: { id: gym.id }
+        expect(response).to have_http_status(302)
+      end
     end
+  end
+
+   
+  describe "Gymscontroller GET #edit" do
+   it "returns a successful response" do
+     get :edit, params: { id: gym.id }  
+     expect(response).to be_successful
+   end
   end
   
   describe "Gymscontroller patch #update" do
@@ -73,7 +72,6 @@ RSpec.describe GymsController, type: :controller do
        expect(response).to have_http_status("302") 
      end
    end
-
    context "User can not update the data" do
       it "renders the update template" do
         patch :update, params: {id: gym.id, gym: { name: " ", discription: "test@gmail.com" } }
@@ -82,10 +80,12 @@ RSpec.describe GymsController, type: :controller do
     end
   end
    
-  context "User can delete the data" do
-    it "renders the show  template" do
-      delete :destroy, params: {id: gym.id }
-      expect(response).to be_successful
+  describe "Gymscontroller delete #destroy" do
+    context "User can delete the data" do
+      it "renders the show  template" do
+        delete :destroy, params: {id: gym.id }
+        expect(response).to be_successful
+      end
     end
   end
 end 

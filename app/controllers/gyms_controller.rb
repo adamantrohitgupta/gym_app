@@ -2,12 +2,12 @@ class GymsController < ApplicationController
  before_action :authenticate_user!,only: %i[show]
   def index
     gymes = Gym.all
+     
   end
  
   def show
     @gym = Gym.find(params[:id])
     @gym_classes = @gym.gym_classes
-    # render json: {message:"successfully showed"},status: :ok
   end
  
   def new
@@ -29,11 +29,11 @@ class GymsController < ApplicationController
  
   def update
    @gym= Gym.find(params[:id])
-   if @gym.update(gym_params)
-    redirect_to @gym
-   else
-    render :edit, status: :unprocessable_entity
-   end
+    if @gym.update(gym_params)
+     redirect_to @gym
+    else
+     render :edit, status: :unprocessable_entity
+    end
   end
 
  def destroy

@@ -3,6 +3,7 @@ class MembershipsController < ApplicationController
     @gym_class = GymClass.find_by(id:params[:class])
     # @gym=@gym_class.gym
     @membership = @gym_class.memberships
+    
   end
 
   def show

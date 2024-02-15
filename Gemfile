@@ -79,3 +79,10 @@ end
 gem "devise"
 gem 'whenever', require: false
 gem 'cssbundling-rails'
+gem "font-awesome-rails"
+gem 'font-awesome-sass'
+gem 'jwt'
+gem 'bcrypt'
+gem 'active_model_serializers'
+gem 'rails-i18n'
+gem 'stripe'

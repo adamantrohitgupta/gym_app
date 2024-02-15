@@ -6,6 +6,7 @@ class UsersController < ApplicationController
    @plans = @user.plans
   end
 
+  
   def show
   end
 

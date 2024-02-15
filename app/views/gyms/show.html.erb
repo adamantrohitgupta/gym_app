@@ -27,10 +27,13 @@
         </p>
         
         <% if gym_class.capacity.eql?(gym_class.memberships.sum { |x| x.users.count }) %>
-         <h3> <%= link_to "Class Full", "/",class:"btn btn-lg btn-danger text-white" %></h3>
+         <h3><%= link_to "Class Full", "/",class:"btn btn-lg btn-danger text-white" %></h3>
          <% else %>
          <h3> <%= link_to "Join Class", "/memberships?class=#{gym_class.id}",class:"btn btn-lg  btn-success text-white" %></h3>
         <% end %>
+
+       <h3><%#= link_to "Demo video",gym_classes_path(gym_class.id) ,class:"btn btn-lg  btn-success text-white"%></h3> 
+
       </div>
     </div>
   <%end%>

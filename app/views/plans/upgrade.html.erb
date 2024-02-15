@@ -1,0 +1,9 @@
+<h1>payment</h1>
+     
+      <h2> <%= @new_membership.name%></h2>
+    
+       <%= number_to_currency(@extra_charge, unit: '₹') %>
+    
+
+<a href="<%= @session.url %>" class="btn btn-primary btn-sm my-2">Pay Now</a>
+ 

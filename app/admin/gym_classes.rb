@@ -10,6 +10,7 @@ ActiveAdmin.register GymClass do
       f.input :gym_id, as: :select, collection: Gym.all
       f.input :trainer_id, as: :select, collection: Trainer.all
       f.input :images, as: :file
+      f.input :video,as: :file
     end
     f.actions
   end
