@@ -16,7 +16,9 @@
         <strong>price:</strong>
         <%= "₹ #{membership.price}"%>
       </p> 
-         
+        
+      
+
       <% if current_user.memberships.include?(membership) %>
         <% plan = current_user.plans.find_by(membership_id: membership.id )%>
           <% session = Stripe::Checkout::Session.retrieve(plan.session_id) %>

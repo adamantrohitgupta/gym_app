@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+ 
   
   get 'trainers/index'
   get 'trainers/show'
@@ -12,9 +13,7 @@ Rails.application.routes.draw do
   end
    
   devise_for :users
-  get 'users/index'
-  get 'users/show'
-  delete 'users/id'
+  resources :users
   get "users/add_membership"
   
   
@@ -22,6 +21,10 @@ Rails.application.routes.draw do
   resources :gym_classes
   resources :gyms
   resources :plans
+  resources :rooms do 
+    resources :messages
+  end
+
   get '/upgrade', to: 'plans#upgrade'
   
 
