@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_15_103854) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_11_114333) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -109,6 +109,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_15_103854) do
     t.bigint "user_id", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "plans", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "membership_id"
@@ -119,6 +129,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_15_103854) do
     t.string "gym_class_id"
     t.index ["membership_id"], name: "index_plans_on_membership_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_private", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trainees", force: :cascade do |t|
@@ -153,6 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_15_103854) do
     t.string "address"
     t.bigint "phone_number"
     t.date "date_of_birth"
+    t.string "stripe_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -161,4 +179,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_15_103854) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "gym_classes", "gyms"
   add_foreign_key "memberships", "gyms"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
 end

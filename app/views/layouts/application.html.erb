@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
    <style>
       body {
         /* background-image: url('<%= asset_path('gymimage.jpg') %>');  */
@@ -16,15 +15,22 @@
         background: #DCDCDC	;
        background-position: center;
       }
+    
+      <%= ".msg-#{current_user&.id}" %> {
+      background-color: #007bff !important;
+      padding: 10px;
+      }
+      <%= ".cont-#{current_user&.id}" %> {
+      display: flex;
+      justify-content: flex-end
+      }
     </style>
-
+    
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <%= render 'shared/navbar' %>
-     
-       <%= yield %>
-
+    <%= yield %>
   </body>
 </html>

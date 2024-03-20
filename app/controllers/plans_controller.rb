@@ -1,4 +1,5 @@
 class PlansController < ApplicationController
+before_action :create_stripe_customer
   def index
     @plans = Plan.all
     
@@ -29,9 +30,9 @@ class PlansController < ApplicationController
         }],
         mode: 'payment',
         payment_intent_data:{
-          # capture_method: 'manual',
+          setup_future_usage: 'off_session',
         },
-        success_url: 'http://localhost:3000/users/index',
+        success_url: 'http://localhost:3000/users',
         cancel_url: 'http://localhost:3000/courses/cancel',
       )
     end
@@ -44,37 +45,51 @@ class PlansController < ApplicationController
   end
   
   def upgrade
-  
     @new_membership = Membership.find_by(id: params[:id])
     user_plans = current_user.plans
-    old_plan = user_plans.find_by(gym_class_id: @new_membership.gym_class.id)
-    @extra_charge =   @new_membership.price - old_plan.membership.price
-   if @extra_charge > 0
-      @session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      line_items: [{
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: @new_membership.name,
+    if user_plans.present? 
+      old_plan = user_plans.find_by(gym_class_id: @new_membership.gym_class.id)
+      @extra_charge =   @new_membership.price - old_plan.membership.price
+      if @extra_charge > 0
+        @session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: @new_membership.name,
+            },
+            unit_amount: @extra_charge.to_i
           },
-          unit_amount: 100
+          quantity: 1
+        }],
+        mode: 'payment',
+        payment_intent_data:{
+          # capture_method: 'manual',
         },
-        quantity: 1
-      }],
-      mode: 'payment',
-      payment_intent_data:{
-        # capture_method: 'manual',
-      },
-      success_url: 'http://localhost:3000/users/index',
-      cancel_url: 'http://localhost:3000/courses/cancel',
-     )  
-      old_plan.update(membership_id: @new_membership.id, session_id: @session.id)
-      flash[:notice] = "#{current_user.name.capitalize} you have successfully joined new plan."
-    
-    elsif @extra_charge < 0 
-      flash[:notice] = "#{current_user.name.capitalize} you have already a  upgraded plan."
-      redirect_to users_index_path
+        customer: current_user.stripe_id,
+        success_url: 'http://localhost:3000/users',
+        cancel_url: 'http://localhost:3000/courses/cancel',
+      )  
+        old_plan.update(membership_id: @new_membership.id, session_id: @session.id)
+        flash[:notice] = "#{current_user.name.capitalize} you have successfully joined new plan."
+      
+      elsif @extra_charge < 0 
+        flash[:notice] = "#{current_user.name.capitalize} you have already a  upgraded plan."
+        redirect_to users_path
+      end
+    else  
+      redirect_to users_path
+    end
+  end
+
+  private 
+
+  def create_stripe_customer 
+   if current_user.stripe_id == nil 
+    stripe_customer = Stripe::Customer.create({email: current_user.email})
+ 
+      current_user.update(stripe_id: stripe_customer.id)
     end
   end
 end
