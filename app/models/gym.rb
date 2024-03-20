@@ -3,6 +3,7 @@ class Gym < ApplicationRecord
   has_many :memberships,dependent: :destroy
   has_many :users, through: :memberships
   has_many :trainers, through: :gym_classes
+  has_many  :plans
   has_one_attached :images
 
 

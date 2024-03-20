@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+  
   get 'trainers/index'
   get 'trainers/show'
  
    
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  
+
+  scope "(:locale)", locale: /en|hi/ do
   root'home#index'
+  end
+   
   devise_for :users
   get 'users/index'
   get 'users/show'
@@ -18,10 +22,17 @@ Rails.application.routes.draw do
   resources :gym_classes
   resources :gyms
   resources :plans
-  patch '/upgrade', to: 'plans#upgrade'
-   
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get '/upgrade', to: 'plans#upgrade'
+  
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+
+  namespace :api do
+   resources :users,:gym_classes,:trainers,:memberships,:gyms,:plans
+   post '/login', to: 'users#login'
+   get  '/cuplan',to: 'users#plan'
+   get '/gymclass', to: 'gyms#gymclass'
+   patch '/upgrade', to: 'plans#upgrade'
+  end
+ 
+ 
 end

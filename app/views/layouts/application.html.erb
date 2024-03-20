@@ -8,7 +8,15 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   <style>
+      body {
+        /* background-image: url('<%= asset_path('gymimage.jpg') %>');  */
+        background-size: cover;
+        background: #DCDCDC	;
+       background-position: center;
+      }
+    </style>
 
     <%= javascript_importmap_tags %>
   </head>

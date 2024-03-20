@@ -42,6 +42,7 @@ RSpec.configure do |config|
   config.fixture_path = Rails.root.join('spec/fixtures')
    
   config.include FactoryBot::Syntax::Methods
+  config.include Warden::Test::Helpers
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -49,7 +50,7 @@ RSpec.configure do |config|
 
   config.use_transactional_fixtures = true
 
-
+   
     
   
   # You can uncomment this line to turn off ActiveRecord support entirely.
