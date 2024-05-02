@@ -15,6 +15,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
   
+   def self.ransackable_attributes(auth_object = nil)
+    ["address", "created_at", "date_of_birth", "email", "encrypted_password", "id", "name", "phone_number", "remember_created_at", "reset_password_sent_at", "reset_password_token", "stripe_id", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["memberships", "messages", "plans"]
+  end
+  
    
 
 end

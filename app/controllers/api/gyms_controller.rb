@@ -2,6 +2,7 @@ class Api::GymsController < ApiController
   before_action :authenticate_request
 
   def index
+  byebug
     @gyms = Gym.all
     render json: @gyms
   end

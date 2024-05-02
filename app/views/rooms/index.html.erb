@@ -20,13 +20,12 @@
 
   <div class="col-md-7  bg-dark text-light p-2 m-3 "id="chatcontainer">
     <% if @single_room %>
-      <div > <h4 class="text-center "> <%= @single_room.name %> </h4></div>
+      <div > <h4 class="text-center"> <%= @user&.name || @single_room.name %> </h4></div>
        <%= turbo_stream_from @single_room %>
       <div id="messages" style="overflow-y: auto; max-height: 400px;" data-controller="message"  >
         <%= render @messages %>
       </div>
       <%= render partial: 'layouts/new_message_form' %>
-       
     <% end %>
   </div>
 </div>

@@ -15,3 +15,9 @@ ActiveAdmin.register GymClass do
     f.actions
   end
 end
+ order = BxBlockOrderManagement::Order.includes(order_items: :seller).find(params[:data][:order_id])
+		 			admin_percentage = order&.current_admin_percentage
+					order.order_items.each do |order_item| 
+		        price = order_item.total_price.to_f - ( order_item.total_price.to_f * admin_percentage / 100)
+					  order_item.seller.wallet_amount += price
+					  order_item.seller.save!
