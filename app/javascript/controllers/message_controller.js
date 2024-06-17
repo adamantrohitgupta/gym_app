@@ -6,7 +6,8 @@ export default class extends Controller {
     
   connect() {
    this.scrollToBottom();
-   console.log("connected");
+   this.clearMessageText();
+    
   }
 
 
@@ -16,5 +17,20 @@ export default class extends Controller {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
   }
+   
+   
+  clearMessageText(){ 
+    const messagesContainer = document.getElementById("messages");
+    const  btn = document.getElementById('msgbtn');
+    let  form = document.getElementById('message-form');
+      btn.addEventListener('click', function(){
+      setTimeout(() => {
+          form.reset();
+      }, 100);
 
+      setTimeout(()=>{
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      },150)    
+    });
+  }
 }

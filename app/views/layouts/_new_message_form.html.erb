@@ -1,16 +1,6 @@
 <div class="form-group msg-form",data-controller="message">
-  <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex" ) do |f| %>
+  <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex",id: "message-form" ) do |f| %>
     <%= f.text_field :content, id: 'chat-text', class: "form-control msg-content", autocomplete: 'off' %>
     <%= f.submit data: { disable_with: false }, class: "btn btn-primary", id: "msgbtn" %>
   <% end %>
 </div>
-
- <script>
-    btn = document.getElementById('msgbtn');
-    btn.addEventListener("click", function(){
-  
-    //  console.log(document.getElementById('chat-text'));  
-    });
-
-     
- </script>

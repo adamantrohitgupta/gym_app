@@ -13,8 +13,8 @@ class Gym < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "discription", "id", "name", "updated_at"]
   end
-
+  
   def self.ransackable_associations(auth_object = nil)
-    ["gym_classes", "images_attachment", "images_blob", "memberships"]
+    ["gym_classes", "images_attachment", "images_blob", "memberships", "plans", "trainers", "users"]
   end
 end
